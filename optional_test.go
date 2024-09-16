@@ -13,18 +13,25 @@ func Test_Optional(t *testing.T) {
 	t.Run("Test some", func(t *testing.T) {
 		t.Parallel()
 
-		opt := gopt.NewSome("car")
+		opt := gopt.Some("car")
 		val, err := opt.Get()
 		require.NoError(t, err)
 		require.Equal(t, "car", val)
 	})
-
 	t.Run("Test none", func(t *testing.T) {
 		t.Parallel()
 
-		opt := gopt.NewNone()
+		opt := gopt.None[string]()
 		val, err := opt.Get()
+		require.Equal(t, "", val)
 		require.Error(t, err)
 		require.ErrorIs(t, err, gopt.NoneErr)
+	})
+	t.Run("Test default", func(t *testing.T) {
+		t.Parallel()
+
+		opt := gopt.None[string]()
+		val := opt.Default("boat")
+		require.Equal(t, "boat", val)
 	})
 }

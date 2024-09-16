@@ -12,16 +12,12 @@ type Optional[T any] struct {
 	some  bool
 }
 
-func NewSome[T any](v T) Option[T] {
-	return Option[T]{value: v, some: true}
+func Some[T any](v T) Optional[T] {
+	return Optional[T]{value: v, some: true}
 }
 
-func NewNone[T any]() Option[T] {
-	return Option[T]{some: false}
-}
-
-func (o *Optional[T]) Some() bool {
-	return o.some
+func None[T any]() Optional[T] {
+	return Optional[T]{some: false}
 }
 
 func (o *Optional[T]) Get() (T, error) {
@@ -29,6 +25,13 @@ func (o *Optional[T]) Get() (T, error) {
 		return o.value, NoneErr
 	}
 	return o.value, nil
+}
+
+func (o *Optional[T]) Default(d T) T {
+	if !o.some {
+		return d
+	}
+	return o.value
 }
 
 func (o Optional[T]) String() string {

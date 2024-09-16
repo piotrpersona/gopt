@@ -1,5 +1,7 @@
 # gopt
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/piotrpersona/gopt.svg)](https://pkg.go.dev/github.com/piotrpersona/gopt)
+
 Simple golang optional package.
 
 ## Install

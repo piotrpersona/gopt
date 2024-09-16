@@ -13,8 +13,10 @@ go get github.com/piotrpersona/gopt
 ## Usage
 
 ```go
-// Create optional type
+// Create optional variable
 a := gopt.Some("value")
+// create none
+n := gopt.None[string]()
 
 // check if value exists
 val, err := a.Get()
